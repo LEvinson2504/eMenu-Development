@@ -3,7 +3,7 @@ const router = express.Router();
 const bcrypt = require("bcryptjs");
 const User = require('../models/User');
 const passport = require("passport");
-
+const { ensureAuthenticated } = require("../config/auth");
 //Login page
 router.get('/login', (req, res) => res.render('login'));
 
@@ -73,8 +73,7 @@ router.post("/register", (req, res) => {
                         })
                         .catch(err => console.log(err));
                     })}
-                )
-            }
+                )}
         })
     }
 });
@@ -87,6 +86,17 @@ router.post("/login", (req, res, next) => {
         failureFlash: true
     })(req, res, next);
 });
+
+//Menu display
+router.get('/menu', ensureAuthenticated, (req, res) => { 
+    console.log(req.user.menu[0]);
+    res.render('menu', {
+        name: req.user.name,
+        itemName: req.user.menu[0].itemName,
+        itemPrice: req.user.menu[0].itemPrice
+    });
+
+})
 
 //Logout handle
 router.get("/logout", (req, res) => {

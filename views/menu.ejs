@@ -1,0 +1,43 @@
+<!-- <h1 class="mt-4">Menu</h1> -->
+<p class="lead mb-3">Welcome <%= name %> </p>
+
+
+
+<div class="row mt-5">
+    <div class="col-md-6 m-auto">
+        <p class="lead mb-3">Menu</p>
+        <span class="lead mb-3"> <%= itemName %>  </span>
+        <span class="lead mb-3"> <%= itemPrice %></span>
+      <div class="card card-body">
+        <h1 class="text-center mb-3"><i class="fas fa-sign-in-alt"></i>  Menu</h1>
+        <%- include("./partials/messages.ejs"); -%>
+        <form action="/users/menu" method="POST">
+          <div class="form-group">
+            <label for="email">Item Name :</label>
+            <input
+              type="text"
+              id="itemName"
+              name="itemName"
+              class="form-control"
+              placeholder="Enter Item name..."
+            />
+          </div>
+          <div class="form-group">
+            <label for="password">Item Price :</label>
+            <input
+              type="number"
+              id="itemPrice"
+              name="itemPrice"
+              class="form-control"
+              placeholder="Enter Item price..."
+            />
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">Add Item</button>
+        </form>
+        <!-- <p class="lead mt-4">
+          No Account? <a href="/users/register">Register</a>
+        </p> -->
+      </div>
+    </div>
+  </div>
+
