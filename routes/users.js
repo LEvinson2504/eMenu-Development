@@ -89,12 +89,43 @@ router.post("/login", (req, res, next) => {
 
 //Menu display
 router.get('/menu', ensureAuthenticated, (req, res) => { 
-    console.log(req.user.menu[0]);
+    console.log(req.user.menu);
     res.render('menu', {
         name: req.user.name,
-        itemName: req.user.menu[0].itemName,
-        itemPrice: req.user.menu[0].itemPrice
+        itemName: req.user.menu,
+        itemPrice: req.user.menu,
     });
+
+})
+
+//Menu add items
+router.post('/menu', ensureAuthenticated, (req, res) => { 
+    // console.log(req.body.itemName);
+    const {name, email, menu} = req.user;
+    User.findOne({email: email}, function(err, foundUser){
+        if(err) {
+            console.log(error);
+            res.status(500).send();
+        } else{
+            if(!foundUser){
+                res.status(404).send();
+            } else {
+                foundUser.menu.push({itemName: req.body.itemName, itemPrice: req.body.itemPrice});
+            }
+            foundUser.save(function(err, savedUser) {
+                if(err){
+                    console.log(err);
+                }
+            })
+        }
+
+    })
+    console.log(menu);
+    // res.render('menu', {
+    //     name: req.user.name,
+    //     itemName: req.user.menu[0].itemName,
+    //     itemPrice: req.user.menu[0].itemPrice
+    // });
 
 })
 
