@@ -92,8 +92,9 @@ router.get('/menu', ensureAuthenticated, (req, res) => {
     console.log(req.user.menu);
     res.render('menu', {
         name: req.user.name,
-        itemName: req.user.menu,
-        itemPrice: req.user.menu,
+        menu: req.user.menu,
+        // itemName: req.user.menu,
+        // itemPrice: req.user.menu,
     });
 
 })
@@ -121,11 +122,10 @@ router.post('/menu', ensureAuthenticated, (req, res) => {
 
     })
     console.log(menu);
-    // res.render('menu', {
-    //     name: req.user.name,
-    //     itemName: req.user.menu[0].itemName,
-    //     itemPrice: req.user.menu[0].itemPrice
-    // });
+    res.render('menu', {
+        name: req.user.name,
+        menu: req.user.menu,
+    });
 
 })
 

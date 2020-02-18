@@ -6,8 +6,12 @@
 <div class="row mt-5">
     <div class="col-md-6 m-auto">
         <p class="lead mb-3">Menu</p>
-        <span class="lead mb-3"> <%= itemName %>  </span>
-        <span class="lead mb-3"> <%= itemPrice %></span>
+        <% for (let i=0; i<menu.length; i++){ %>
+          <div class="formgroup">
+        <span class="lead mb-3"> <%= menu[i].itemName %></span>
+        <span class="lead mb-3"> <%= menu[i].itemPrice %></span>
+      </div>
+        <% } %>
       <div class="card card-body">
         <h1 class="text-center mb-3"><i class="fas fa-sign-in-alt"></i>  Menu</h1>
         <%- include("./partials/messages.ejs"); -%>
