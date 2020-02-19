@@ -89,13 +89,21 @@ router.post("/login", (req, res, next) => {
 
 //Menu display
 router.get('/menu', ensureAuthenticated, (req, res) => { 
-    console.log(req.user.menu);
-    res.render('menu', {
-        name: req.user.name,
-        menu: req.user.menu,
-        // itemName: req.user.menu,
-        // itemPrice: req.user.menu,
+    console.log(req.user.name);
+    User.findOne({name: req.user.name}, function(err, user){
+        if(err) {
+            res.status(500).send();
+        } else {
+            console.log(user);
+            res.render('menu', {
+                name: user.name,
+                menu: user.menu,
+                // itemName: req.user.menu,
+                // itemPrice: req.user.menu,
+            });
+        }
     });
+   
 
 })
 
@@ -117,15 +125,15 @@ router.post('/menu', ensureAuthenticated, (req, res) => {
                 if(err){
                     console.log(err);
                 }
+                res.render('menu', {
+                    name: savedUser.name,
+                    menu: savedUser.menu,
+                });
             })
         }
-
     })
-    console.log(menu);
-    res.render('menu', {
-        name: req.user.name,
-        menu: req.user.menu,
-    });
+    // console.log(menu);
+   
 
 })
 
