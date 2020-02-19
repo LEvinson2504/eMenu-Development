@@ -8,8 +8,8 @@
       <p class="lead mb-3">Menu</p>
       <% for (let i=0; i<menu.length; i++){ %>
         <div class="formgroup">
-      <span class="lead mb-3"> <%= menu[i].itemName %></span>
-      <span class="lead mb-3"> <%= menu[i].itemPrice %></span>
+      <span class="lead mb-3"> <%= menu[i].itemName %> - </span>
+      <span class="lead mb-3">₹ <%= menu[i].itemPrice %></span>
     </div>
       <% } %>
       <div class="card card-body">
