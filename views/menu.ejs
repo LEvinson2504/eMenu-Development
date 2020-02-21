@@ -1,10 +1,10 @@
 <!-- <h1 class="mt-4">Menu</h1> -->
+
+
 <p class="lead mb-3">Welcome <%= name %> </p>
-
-
-
 <div class="row mt-5">
-    <div class="col-md-6 m-auto">
+  <div class="card card-body">
+    <!-- <div class="col-md-6 m-auto"> -->
       <p class="lead mb-3">Menu</p>
       <% for (let i=0; i<menu.length; i++){ %>
         <div class="formgroup">
@@ -12,6 +12,7 @@
       <span class="lead mb-3">₹ <%= menu[i].itemPrice %></span>
     </div>
       <% } %>
+    </div>
       <div class="card card-body">
         <h1 class="text-center mb-3"><i class="fas fa-sign-in-alt"></i>  Menu</h1>
         <%- include("./partials/messages.ejs"); -%>
