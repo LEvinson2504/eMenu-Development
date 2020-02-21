@@ -111,6 +111,8 @@ router.get('/menu', ensureAuthenticated, (req, res) => {
 router.post('/menu', ensureAuthenticated, (req, res) => { 
     // console.log(req.body.itemName);
     const {name, email, menu} = req.user;
+    let errors = []
+
     User.findOne({email: email}, function(err, foundUser){
         if(err) {
             console.log(error);
@@ -118,17 +120,28 @@ router.post('/menu', ensureAuthenticated, (req, res) => {
         } else{
             if(!foundUser){
                 res.status(404).send();
-            } else {
+            } else if(req.body.itemName == "" || req.body.itemPrice == "" || req.body.itemPrice.isNaN()){
+                errors.push({msg: "Fields cannot be blank"});
+            }
+            else {
                 foundUser.menu.push({itemName: req.body.itemName, itemPrice: req.body.itemPrice});
             }
             foundUser.save(function(err, savedUser) {
                 if(err){
                     console.log(err);
                 }
+                if (errors.length > 0) {
+                    res.render("menu", {
+                        errors,
+                        name, 
+                        menu,
+                    });
+                } else{
                 res.render('menu', {
                     name: savedUser.name,
                     menu: savedUser.menu,
                 });
+            }
             })
         }
     })
