@@ -1,5 +1,14 @@
 <h1 class="mt-4">Dashboard</h1>
 <p class="lead mb-3">Welcome <%= name %> </p>
-<p class="lead mb-3">Menu - <%= menu[0].itemName %> </p>
+<div class="card card-body">
+    <!-- <div class="col-md-6 m-auto"> -->
+      <p class="lead mb-3">Menu</p>
+      <% for (let i=0; i<menu.length; i++){ %>
+        <div class="formgroup">
+      <span class="lead mb-3"> <%= menu[i].itemName %> - </span>
+      <span class="lead mb-3">₹ <%= menu[i].itemPrice %></span>
+    </div>
+      <% } %>
+    </div>
 <a href="/users/logout" class="btn btn-secondary">Logout</a>
 <a href="/users/menu" class="btn btn-primary">Add Menu</a>

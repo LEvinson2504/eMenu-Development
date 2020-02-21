@@ -111,6 +111,8 @@ router.get('/menu', ensureAuthenticated, (req, res) => {
 router.post('/menu', ensureAuthenticated, (req, res) => { 
     // console.log(req.body.itemName);
     const {name, email, menu} = req.user;
+    let errors = [];
+
     User.findOne({email: email}, function(err, foundUser){
         if(err) {
             console.log(error);
@@ -119,17 +121,34 @@ router.post('/menu', ensureAuthenticated, (req, res) => {
             if(!foundUser){
                 res.status(404).send();
             } else {
+                if(req.body.itemName == "" || req.body.itemPrice == "") {
+                    errors.push({msg: "Field cannot be left blank"})
+                } else {
                 foundUser.menu.push({itemName: req.body.itemName, itemPrice: req.body.itemPrice});
+                }
             }
+
+            
+            //save to database
             foundUser.save(function(err, savedUser) {
                 if(err){
                     console.log(err);
                 }
+                if (errors.length > 0) {
+                    res.render("menu", {
+                        errors,
+                        name, 
+                        email,
+                        menu,
+                    });
+                } else {
                 res.render('menu', {
                     name: savedUser.name,
                     menu: savedUser.menu,
                 });
+            }
             })
+
         }
     })
     // console.log(menu);
