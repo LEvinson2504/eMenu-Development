@@ -10,8 +10,34 @@
         <div class="formgroup">
       <span class="lead mb-3"> <%= menu[i].itemName %> - </span>
       <span class="lead mb-3">₹ <%= menu[i].itemPrice %></span>
+      <button class="delItem" value=<%= i %>>X</button>
     </div>
       <% } %>
+
+      <script>
+        let buttons = document.querySelectorAll(".delItem");
+        for(let i=0; i<buttons.length; i++){
+          buttons[i].addEventListener("click", async function(){
+            // console.log(buttons[i].value)
+            try {     
+              const response = await fetch('/users/menu/del', {
+                method: 'post',
+                body: {
+                  value: buttons[i].value
+                },
+                headers: { 'Content-Type': 'application/json' },
+              });
+              console.log('Completed!', response);
+            } catch(err) {
+              console.error(`Error: ${err}`);
+          }
+        });
+      }
+
+
+      </script>
+
+  
     </div>
       <div class="card card-body">
         <h1 class="text-center mb-3"><i class="fas fa-sign-in-alt"></i>  Menu</h1>

@@ -150,6 +150,20 @@ router.post('/menu', ensureAuthenticated, (req, res) => {
 
 })
 
+//delete menu item
+router.post("/menu/del", (req, res) => {
+    // console.log("i got a request!");
+    console.log(req.body);
+    const {name, email, menu} = req.user;
+    const item = req.body;
+
+    // User.findOne({email: email}, function(err, foundUser){
+    //     if(err) {
+    //         console.log(error);
+    //         res.status(500).send();
+    //     }
+});
+
 //Logout handle
 router.get("/logout", (req, res) => {
     req.logout();

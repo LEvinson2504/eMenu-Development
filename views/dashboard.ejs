@@ -1,3 +1,5 @@
+
+
 <h1 class="mt-4">Dashboard</h1>
 <p class="lead mb-3">Welcome <%= name %> </p>
 <div class="card card-body">
@@ -10,5 +12,23 @@
     </div>
       <% } %>
     </div>
+
+    <% menu.forEach((element, index) => { %>
+      <div class="formgroup">
+      <span class="lead mb-3"> <%= index %>. </span>
+      <span class="lead mb-3"> <%= element.itemName %> - </span>
+      <span class="lead mb-3">₹ <%= element.itemPrice %></span>
+      <button onclick = "deleteItem(index)">X </button>
+    </div>
+    <% }) %>
+
+    <script>
+      function deleteItem(index) {
+        console.log("function works");
+        menu.splice(index, 1);
+      };
+    </script>
+
+    
 <a href="/users/logout" class="btn btn-secondary">Logout</a>
 <a href="/users/menu" class="btn btn-primary">Add Menu</a>

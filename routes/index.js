@@ -9,7 +9,8 @@ router.get('/', (req, res) => res.render('welcome'));
 router.get('/dashboard', ensureAuthenticated, (req, res) => { 
     res.render('dashboard', {
         name: req.user.name,
-        menu: req.user.menu
+        menu: req.user.menu,
+        deleteItem: "deleteItem(index)"
     });
 
 })
