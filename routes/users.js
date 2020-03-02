@@ -120,7 +120,7 @@ router.post('/menu', ensureAuthenticated, (req, res) => {
         } else{
             if(!foundUser){
                 res.status(404).send();
-            } else if(req.body.itemName == "" || req.body.itemPrice == "" || req.body.itemPrice.isNaN()){
+            } else if(req.body.itemName == "" || req.body.itemPrice == "" || req.body.itemPrice.isNaN){
                 errors.push({msg: "Fields cannot be blank"});
             }
             else {
@@ -142,7 +142,7 @@ router.post('/menu', ensureAuthenticated, (req, res) => {
                     menu: savedUser.menu,
                 });
             }
-            })
+            });
         }
     })
     // console.log(menu);
@@ -151,18 +151,35 @@ router.post('/menu', ensureAuthenticated, (req, res) => {
 })
 
 //delete menu item
-router.post("/menu/del", (req, res) => {
-    // console.log("i got a request!");
-    console.log(req.body);
-    const {name, email, menu} = req.user;
-    const item = req.body;
+router.post("/menu/del", ensureAuthenticated, express.json(), (req, res) => {
+    console.log("i got a request!");
 
-    // User.findOne({email: email}, function(err, foundUser){
-    //     if(err) {
-    //         console.log(error);
-    //         res.status(500).send();
-    //     }
-});
+    // console.log();
+    const {name, email, menu} = req.user;
+    let index = req.body.value;
+
+    //update user's menu after deletion
+    User.findOne({name: name}, function(err, nUser){
+        if(err) {
+            res.status(500).send();
+        } else {
+            nUser.menu.splice(index,1);
+            console.log(nUser);
+            nUser.save(function(err, savedUser) {
+                if(err){
+                    console.log(err);
+                } else {
+                res.render('menu', {
+                    name: savedUser.name,
+                    menu: savedUser.menu,
+                });
+            }
+            });
+        }
+    });
+
+    console.log(req.body.value);
+    });
 
 //Logout handle
 router.get("/logout", (req, res) => {
