@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { ensureAuthenticated } = require("../config/auth");
+const User = require('../models/User');
 
 //welcome page
 router.get('/', (req, res) => res.render('welcome'));
@@ -14,6 +15,25 @@ router.get('/dashboard', ensureAuthenticated, (req, res) => {
     });
 
 })
+
+router.get('/menu/:id', (req, res) => {
+    let id = req.params.id;
+    // res.json(menuId);
+    console.log(req.params);
+    User.findOne({_id: id}, function(err, user){
+        if(err) {
+            res.status(500).send();
+        } else {
+            console.log(user);
+            res.render('publicMenu', {
+                name: user.name,
+                menu: user.menu,
+                // itemName: req.user.menu,
+                // itemPrice: req.user.menu,
+            });
+        }
+    });
+});
 
 
 module.exports = router;

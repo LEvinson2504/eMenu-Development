@@ -15,6 +15,11 @@
       <% } %>
 
       <script>
+        // prevent form resubmission
+        if ( window.history.replaceState ) {
+        window.history.replaceState( null, null, window.location.href );
+        }
+
         let buttons = document.querySelectorAll(".delItem");
         for(let i=0; i<buttons.length; i++){
           buttons[i].addEventListener("click", function() {
@@ -27,6 +32,15 @@
                 headers: { 'Content-Type': 'application/json' },
               });
               console.log('Completed!', response);
+              // window.reload();
+              // location.reload();
+
+              //remove element fromm DOM
+              let parentNode = buttons[i].parentNode;
+              while (parentNode.firstChild) {
+                parentNode.removeChild(parentNode.firstChild);
+              }
+              
             } 
         );
       }

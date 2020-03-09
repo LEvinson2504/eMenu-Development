@@ -169,6 +169,7 @@ router.post("/menu/del", ensureAuthenticated, express.json(), (req, res) => {
                 if(err){
                     console.log(err);
                 } else {
+                console.log("resend page");
                 res.render('menu', {
                     name: savedUser.name,
                     menu: savedUser.menu,

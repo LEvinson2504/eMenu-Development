@@ -1,7 +1,7 @@
 
 
-<h1 class="mt-4">Dashboard</h1>
-<p class="lead mb-3">Welcome <%= name %> </p>
+<h1 class="mt-4">Menu by <bold> <%= name %></bold></h1>
+
 <div class="container row d-flex justify-content-center">
 <ul class="card list-group">
     <!-- <div class="col-md-6 m-auto"> -->
@@ -10,20 +10,20 @@
           <li class="list-group-item">
             <span class="lead mb-3"> <%= menu[i].itemName %> - </span>
             <span class="lead mb-3">₹ <%= menu[i].itemPrice %> </span>
+            <button>Order now!</button>
           </li>
         <% } %>
 </ul>
 </div>
 
-<div class="container row d-flex justify-content-center">
+<!-- <div class="container row d-flex justify-content-center">
 <a href="/users/logout" class="btn btn-secondary">Logout</a>
 <a href="/users/menu" class="btn btn-primary">Add Menu</a>
-</div>
+</div> -->
 
 
-
-    <script>
-    </script>
+<script>
+</script>
 
     
 
