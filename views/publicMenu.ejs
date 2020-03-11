@@ -8,15 +8,43 @@
         <p class="lead mb-3 text-center">Menu</p>
         <% for (let i=0; i<menu.length; i++){ %>
           <li class="list-group-item">
-            <span class="lead mb-3"> <%= menu[i].itemName %> - </span>
-            <span class="lead mb-3">₹ <%= menu[i].itemPrice %> </span>
-            <button>Order now!</button>
+              <span class="lead mb-3"> <%= menu[i].itemName %> - </span>
+              <span class="lead mb-3">₹ <%= menu[i].itemPrice %> </span>
+              <button class="orderItem" value="<%= menu[i].itemName %>">Order this!</button>
           </li>
         <% } %>
 </ul>
 <img alt="Menu barcode"
      src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=<%= barcode %>" >
 </div>
+<script>
+  // prevent form resubmission
+  if ( window.history.replaceState ) {
+  window.history.replaceState( null, null, window.location.href );
+  }
+
+  //Post call to delete item:
+  let buttons = document.querySelectorAll(".orderItem");
+  for(let i=0; i<buttons.length; i++){
+    buttons[i].addEventListener("click", function() {
+      // console.log(buttons[i].value)     
+        const response = fetch('/menu/order', {
+          method: 'post',
+          body: JSON.stringify({
+            value: buttons[i].value
+          }),
+          headers: { 'Content-Type': 'application/json' },
+        });
+        console.log('Completed!', response);
+        // window.reload();
+        // location.reload();
+        
+      } 
+  );
+}
+
+
+</script>
 
 <!-- <div class="container row d-flex justify-content-center">
 <a href="/users/logout" class="btn btn-secondary">Logout</a>

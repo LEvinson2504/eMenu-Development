@@ -36,5 +36,9 @@ router.get('/menu/:id', (req, res) => {
     });
 });
 
+//Place order 
+router.post("/menu/order", express.json(), (req, res) => {
+    console.log(req.body.value + " was ordered");
+});
 
 module.exports = router;
