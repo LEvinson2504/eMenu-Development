@@ -28,6 +28,7 @@ router.get('/menu/:id', (req, res) => {
             res.render('publicMenu', {
                 name: user.name,
                 menu: user.menu,
+                barcode: "https://pacific-savannah-86216.herokuapp.com/menu/" + id,
                 // itemName: req.user.menu,
                 // itemPrice: req.user.menu,
             });
