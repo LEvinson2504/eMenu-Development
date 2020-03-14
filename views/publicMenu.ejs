@@ -2,6 +2,7 @@
 <ul class="card list-group">
     <!-- <div class="col-md-6 m-auto"> -->
         <h1 class="mt-4 text-center">Menu by <bold> <%= name %></bold></h1>
+        <h1 class="mt-4 text-center">Your table is : <%= table %></h1>
         <% for (let i=0; i<menu.length; i++){ %>
           <li class="list-group-item text-center">
               <span class="lead mb-3"> <%= menu[i].itemName %> - </span>
@@ -16,11 +17,12 @@
      <p class="text-muted text-center">scan to open the menu on your phone!</p>
 </div>
 <script>
+  let table = <%= table %>;
   // prevent form resubmission
   if ( window.history.replaceState ) {
   window.history.replaceState( null, null, window.location.href );
   }
-
+  
   //Post call to delete item:
   let buttons = document.querySelectorAll(".orderItem");
   for(let i=0; i<buttons.length; i++){
@@ -29,7 +31,8 @@
         const response = fetch('/menu/order', {
           method: 'post',
           body: JSON.stringify({
-            value: buttons[i].value
+            value: buttons[i].value,
+            table: table,
           }),
           headers: { 'Content-Type': 'application/json' },
         });

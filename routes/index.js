@@ -16,8 +16,9 @@ router.get('/dashboard', ensureAuthenticated, (req, res) => {
 
 })
 
-router.get('/menu/:id', (req, res) => {
-    let id = req.params.id;
+router.get('/menu/:id/:table?', (req, res) => {
+    //shorthand for let id = req.params.id
+    const {id, table} = req.params;
     // res.json(menuId);
     console.log(req.params);
     User.findOne({_id: id}, function(err, user){
@@ -29,6 +30,7 @@ router.get('/menu/:id', (req, res) => {
                 name: user.name,
                 menu: user.menu,
                 barcode: "https://pacific-savannah-86216.herokuapp.com/menu/" + id,
+                table: table || 0,
                 // itemName: req.user.menu,
                 // itemPrice: req.user.menu,
             });
@@ -38,7 +40,8 @@ router.get('/menu/:id', (req, res) => {
 
 //Place order 
 router.post("/menu/order", express.json(), (req, res) => {
-    console.log(req.body.value + " was ordered");
+    const {value, table} = req.body;
+    console.log( value + " was ordered on table " + table);
 });
 
 module.exports = router;

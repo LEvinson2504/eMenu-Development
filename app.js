@@ -8,6 +8,7 @@ const passport = require("passport");
 
 const app = express();
 
+
 //passport config 
 require("./config/passport")(passport);
 
