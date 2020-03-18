@@ -4,6 +4,8 @@ const bcrypt = require("bcryptjs");
 const User = require('../models/User');
 const passport = require("passport");
 const { ensureAuthenticated } = require("../config/auth");
+const multer = require('multer')
+var upload = multer({ dest: 'uploads/' })
 //Login page
 router.get('/login', (req, res) => res.render('login'));
 
@@ -108,8 +110,9 @@ router.get('/menu', ensureAuthenticated, (req, res) => {
 })
 
 //Menu add items
-router.post('/menu', ensureAuthenticated, (req, res) => { 
+router.post('/menu', ensureAuthenticated, upload.single('itemImage'), (req, res) => { 
     // console.log(req.body.itemName);
+    console.log(req.file);
     const {name, email, menu} = req.user;
     let errors = []
 
@@ -124,7 +127,9 @@ router.post('/menu', ensureAuthenticated, (req, res) => {
                 errors.push({msg: "Fields cannot be blank"});
             }
             else {
-                foundUser.menu.push({itemName: req.body.itemName, itemPrice: req.body.itemPrice});
+                foundUser.menu.push({itemName: req.body.itemName, 
+                                     itemPrice: req.body.itemPrice,
+                                     itemImage: `/${req.file.filename}`});
             }
             foundUser.save(function(err, savedUser) {
                 if(err){
@@ -164,12 +169,12 @@ router.post("/menu/del", ensureAuthenticated, express.json(), (req, res) => {
             res.status(500).send();
         } else {
             nUser.menu.splice(index,1);
-            console.log(nUser);
+            // console.log(nUser);
             nUser.save(function(err, savedUser) {
                 if(err){
                     console.log(err);
                 } else {
-                console.log("resend page");
+                // console.log("resend page");
                 res.render('menu', {
                     name: savedUser.name,
                     menu: savedUser.menu,

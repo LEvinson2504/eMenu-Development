@@ -14,6 +14,10 @@ const MenuSchema = new mongoose.Schema({
         type: Number, 
         required: true,
         default: 0,
+    },
+    itemImage: {
+        type: String,
+        required: false, //can add a default image here 
     }
 });
 const UserSchema = new mongoose.Schema({

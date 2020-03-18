@@ -8,6 +8,8 @@ const passport = require("passport");
 
 const app = express();
 
+//make uploads public
+app.use( express.static( "uploads" ) );
 
 //passport config 
 require("./config/passport")(passport);

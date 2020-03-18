@@ -6,6 +6,7 @@
       <p class="lead mb-3">Menu</p>
       <% for (let i=0; i<menu.length; i++){ %>
         <div class="formgroup">
+      <img src="<%= menu[i].itemImage %>" alt="" height="50" width="50">
       <span class="lead mb-3"> <%= menu[i].itemName %> - </span>
       <span class="lead mb-3">₹ <%= menu[i].itemPrice %></span>
       <button class="delItem" value=<%= i %>>X</button>
@@ -51,7 +52,7 @@
       <div class="card card-body">
         <h1 class="text-center mb-3"><i class="fas fa-sign-in-alt"></i>  Menu</h1>
         <%- include("./partials/messages.ejs"); -%>
-        <form action="/users/menu" method="POST">
+        <form action="/users/menu" method="POST" enctype="multipart/form-data">
           <div class="form-group">
             <label for="email">Item Name :</label>
             <input
@@ -70,6 +71,15 @@
               name="itemPrice"
               class="form-control"
               placeholder="Enter Item price..."
+            />
+          </div>
+          <div class="form-group">
+            <label for="image">Image :</label>
+            <input
+              type="file"
+              id="itemImage"
+              name="itemImage"
+              class="form-control"
             />
           </div>
           <button type="submit" class="btn btn-primary btn-block">Add Item</button>
