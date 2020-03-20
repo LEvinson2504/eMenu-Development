@@ -1,10 +1,11 @@
 <div class="container row d-inline justify-content-center">
+<h1 class="lead md-2">Your table is : <%= table %></h1>
 <ul class="card list-group">
     <!-- <div class="col-md-6 m-auto"> -->
         <h1 class="mt-4 text-center">Menu by <bold> <%= name %></bold></h1>
-        <h1 class="mt-4 text-center">Your table is : <%= table %></h1>
         <% for (let i=0; i<menu.length; i++){ %>
           <li class="list-group-item text-center">
+              <img src="<%= menu[i].itemImage %>" class="item-image" alt="" height="50" width="50">
               <span class="lead mb-3 item-name"> <%= menu[i].itemName %> - </span>
               <span class="lead mb-3 item-price">₹<%= menu[i].itemPrice %> </span>
               <button class="orderItem" value="<%= menu[i].itemName %>">Order this!</button>
@@ -14,7 +15,7 @@
 
 <!-- cart -->
 <section class="card row d-flex pt-5">
-            <h2 class="section-header d-block mx-auto">CART</h2>
+            <h1 class="section-header d-block mx-auto">CART</h1>
             <!-- <div class="cart-row d-block mx-auto">
                 <span class="cart-item cart-header cart-column">ITEM</span>
                 <span class="cart-price cart-header cart-column">PRICE</span>
@@ -23,8 +24,9 @@
             <div class="cart-items d-block mx-auto">
             </div>
             <div class="cart-total">
-                <strong class="cart-total-title">Total</strong>
+               <h4> <strong class="cart-total-title">Total</strong>
                <span class="cart-total-price">₹ 0.00</span>
+               </h4>
             </div>
             <button class="btn btn-primary btn-purchase" type="button">PURCHASE</button>
         </section>
@@ -126,13 +128,13 @@ function addToCartClicked(event) {
     var shopItem = button.parentElement;
     var title = shopItem.getElementsByClassName('item-name')[0].innerText
     var price = shopItem.getElementsByClassName('item-price')[0].innerText
-    // var imageSrc = shopItem.getElementsByClassName('shop-item-image')[0].src
+    var imageSrc = shopItem.getElementsByClassName('item-image')[0].src
     console.log(title, price);
-    addItemToCart(title, price) //imageSrc needed
+    addItemToCart(title, price, imageSrc) //imageSrc needed
     updateCartTotal()
 }
 
-function addItemToCart(title, price, imageSrc = "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fcommons%2F2%2F2d%2FPunch_Neapolitan_Pizza_Margherita.jpg&f=1&nofb=1") {
+function addItemToCart(title, price, imageSrc) {
     var cartRow = document.createElement('div')
     cartRow.classList.add('cart-row')
     var cartItems = document.getElementsByClassName('cart-items')[0]

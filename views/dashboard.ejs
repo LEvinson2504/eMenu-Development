@@ -1,27 +1,35 @@
 <h1 class="mt-4">Dashboard</h1>
 <p class="lead mb-3">Welcome <%= name %> </p>
-<div class="container row d-flex justify-content-center">
-<ul class="card list-group">
-    <!-- <div class="col-md-6 m-auto"> -->
-        <p class="lead mb-3 text-center">Menu</p>
-        <% for (let i=0; i<menu.length; i++){ %>
-          <li class="list-group-item">
-            <span class="lead mb-3"> <%= menu[i].itemName %> - </span>
-            <span class="lead mb-3">₹ <%= menu[i].itemPrice %> </span>
-          </li>
-        <% } %>
-</ul>
-</div>
-
-<div class="container row d-flex justify-content-center">
-<a href="/users/logout" class="btn btn-secondary">Logout</a>
-<a href="/users/menu" class="btn btn-primary">Add Menu</a>
-</div>
-
-
-
+<div class="container-fluid row justify-content-center">
+  <ul class="card list-group col-sm-8 p-4">
+          <h1 class="display lg-6 text-center">Menu</h1>
+          <% for (let i=0; i<menu.length; i++){ %>
+            <li class="list-group-item">
+              <img src="<%= menu[i].itemImage %>" alt="" height="50" width="50">
+              <span class="lead mb-3"> <%= menu[i].itemName %> - </span>
+              <span class="lead mb-3">₹ <%= menu[i].itemPrice %> </span>
+            </li>
+         <% } %>
+         <div class="row d-flex justify-content-center">
+         <div class="row-md-2 p-2">
+         <a href="/users/logout" class="btn btn-secondary btn-block">Logout</a>
+         </div>
+         <div class="row-md-2 p-2">
+         <a href="/users/menu" class="btn btn-primary btn-block">Edit Menu</a>
+         </div>
+         </div>
+  </ul>
+  <div class=" card col-sm p-4">
+    <form action="/dashboard" method="POST">
+      <input type="text" id="tablenumber" name="tablenumber" placeholder="enter table number here.."> 
+      <button class="btn btn-info sm" id="tablesubmit" type="submit">show qr code!</button>
+    </form>
+    <img alt="Menu barcode"
+    src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=<%= barcode %>"
+    class="rounded mx-auto d-block pt-5 pb-2" >
+    <p class="text-muted text-center">Save/Print this image for <br>customer's to open your menu!</p>
     <script>
+     
     </script>
-
-    
-
+</div>
+</div>

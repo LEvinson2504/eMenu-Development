@@ -3,6 +3,8 @@ const router = express.Router();
 const { ensureAuthenticated } = require("../config/auth");
 const User = require('../models/User');
 
+//body parser
+router.use(express.json());
 //welcome page
 router.get('/', (req, res) => res.render('welcome'));
 
@@ -11,7 +13,17 @@ router.get('/dashboard', ensureAuthenticated, (req, res) => {
     res.render('dashboard', {
         name: req.user.name,
         menu: req.user.menu,
-        deleteItem: "deleteItem(index)"
+        barcode: "https://pacific-savannah-86216.herokuapp.com/menu/" + req.user._id,
+    });
+
+})
+
+router.post('/dashboard', ensureAuthenticated, (req, res) => { 
+    console.log(req.body.tablenumber);
+    res.render('dashboard', {
+        name: req.user.name,
+        menu: req.user.menu,
+        barcode: "https://pacific-savannah-86216.herokuapp.com/menu/" + req.user._id + "/" + req.body.tablenumber,
     });
 
 })
