@@ -6,8 +6,8 @@
           <% for (let i=0; i<menu.length; i++){ %>
             <li class="list-group-item">
               <img src="<%= menu[i].itemImage %>" alt="" height="50" width="50">
-              <span class="lead mb-3"> <%= menu[i].itemName %> - </span>
-              <span class="lead mb-3">₹ <%= menu[i].itemPrice %> </span>
+              <span class="lead mb-3 menu-items"> <%= menu[i].itemName %> - </span>
+              <span class="lead mb-3 menu-items">₹ <%= menu[i].itemPrice %> </span>
             </li>
          <% } %>
          <div class="row d-flex justify-content-center">
@@ -21,7 +21,8 @@
   </ul>
   <div class=" card col-sm p-4">
     <form action="/dashboard" method="POST">
-      <input type="text" id="tablenumber" name="tablenumber" placeholder="enter table number here.."> 
+      <input type="text" id="tablenumber" name="tablenumber" 
+        placeholder="enter table number.." class="form-control pb-2"> 
       <button class="btn btn-info sm" id="tablesubmit" type="submit">show qr code!</button>
     </form>
     <img alt="Menu barcode"

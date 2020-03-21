@@ -6,8 +6,8 @@
         <% for (let i=0; i<menu.length; i++){ %>
           <li class="list-group-item text-center">
               <img src="<%= menu[i].itemImage %>" class="item-image" alt="" height="50" width="50">
-              <span class="lead mb-3 item-name"> <%= menu[i].itemName %> - </span>
-              <span class="lead mb-3 item-price">₹<%= menu[i].itemPrice %> </span>
+              <span class="lead mb-3 item-name menu-item"> <%= menu[i].itemName %> - </span>
+              <span class="lead mb-3 item-price menu-item">₹<%= menu[i].itemPrice %> </span>
               <button class="orderItem" value="<%= menu[i].itemName %>">Order this!</button>
           </li>
         <% } %>

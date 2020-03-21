@@ -11,6 +11,8 @@ const app = express();
 //make uploads public
 app.use( express.static( "uploads" ) );
 
+//make styles public
+app.use( express.static( "public" ) );
 //passport config 
 require("./config/passport")(passport);
 
