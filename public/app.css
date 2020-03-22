@@ -1,6 +1,6 @@
 @font-face {
     font-family: 'black_jackregular';
-    src: url('/public/blackjack-webfont.woff');
+    src: url('blackjack-webfont.woff');
     src: url('blackjack-webfont.eot?#iefix') format('embedded-opentype'),
          url('blackjack-webfont.woff2') format('woff2'),
          url('blackjack-webfont.woff') format('woff'),
