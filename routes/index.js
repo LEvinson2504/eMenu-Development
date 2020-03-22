@@ -3,6 +3,8 @@ const router = express.Router();
 const { ensureAuthenticated } = require("../config/auth");
 const User = require('../models/User');
 
+//make styles public
+router.use( express.static( "public" ) )
 //body parser
 router.use(express.json());
 //welcome page

@@ -11,13 +11,22 @@
 
 }
 body {
-    background-color: #b8e1ff;
+    /* background-color: #b8e1ff; */
+    /* background-image: url("eat-printed-paper-709840.jpg"); */
+}
+.background-img {
+    height: 100%;
+    width: 100%;
+    min-width: 1280px;
+    position: absolute;
+    overflow: hidden;
+    
 }
 .card {
-    background-color: #fffff0;
+    background-color: #e6ebe0;
 }
 
-p, h1 {
+p, h1, h3{
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     padding: 3px;
 }

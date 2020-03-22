@@ -3,13 +3,13 @@
 <div class="row mt-5">
   <div class="card card-body">
     <!-- <div class="col-md-6 m-auto"> -->
-      <p class="lead mb-3">Menu</p>
+      <h3 class="">Today's menu - </h3> <hr>
       <% for (let i=0; i<menu.length; i++){ %>
         <div class="formgroup">
       <img src="<%= menu[i].itemImage %>" alt="" height="50" width="50">
-      <span class="lead mb-3"> <%= menu[i].itemName %> - </span>
-      <span class="lead mb-3">₹ <%= menu[i].itemPrice %></span>
-      <button class="delItem" value=<%= i %>>X</button>
+      <span class="lead mb-3 menu-items"> <%= menu[i].itemName %> - </span>
+      <span class="lead mb-3 menu-items">₹ <%= menu[i].itemPrice %></span>
+      <button class="delItem btn btn-danger" value=<%= i %>>X</button>
     </div>
       <% } %>
 
