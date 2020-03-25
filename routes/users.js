@@ -94,7 +94,7 @@ router.post("/login", (req, res, next) => {
 
 //Menu display
 router.get('/menu', ensureAuthenticated, (req, res) => { 
-    console.log(req.user.name);
+    // console.log(req.user.name);
     User.findOne({name: req.user.name}, function(err, user){
         if(err) {
             res.status(500).send();
@@ -114,8 +114,8 @@ router.get('/menu', ensureAuthenticated, (req, res) => {
 
 //Menu add items
 router.post('/menu', ensureAuthenticated, upload.single('itemImage'), (req, res) => { 
-    // console.log(req.body.itemName);
-    console.log(req.file);
+    console.log("hi", req.body.itemType);
+    // console.log(req.file);
     const {name, email, menu} = req.user;
     let errors = []
 
@@ -132,7 +132,9 @@ router.post('/menu', ensureAuthenticated, upload.single('itemImage'), (req, res)
             else {
                 foundUser.menu.push({itemName: req.body.itemName, 
                                      itemPrice: req.body.itemPrice,
-                                     itemImage: `/${req.file.filename}`});
+                                     itemImage: `/${req.file.filename}`,
+                                     itemType: req.body.itemType,
+                                     itemDescription: req.body.itemDescription});
             }
             foundUser.save(function(err, savedUser) {
                 if(err){

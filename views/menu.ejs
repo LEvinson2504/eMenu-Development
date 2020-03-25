@@ -4,15 +4,57 @@
   <div class="card card-body">
     <!-- <div class="col-md-6 m-auto"> -->
       <h3 class="">Today's menu - </h3> <hr>
+      <h4> Starters </h4>
       <% for (let i=0; i<menu.length; i++){ %>
-        <div class="formgroup">
-      <img src="<%= menu[i].itemImage %>" alt="" height="50" width="50">
-      <span class="lead mb-3 menu-items"> <%= menu[i].itemName %> - </span>
-      <span class="lead mb-3 menu-items">₹ <%= menu[i].itemPrice %></span>
-      <button class="delItem btn btn-danger" value=<%= i %>>X</button>
-    </div>
+        <% if (menu[i].itemType == "starter"){ %>
+          <div class="formgroup">
+          <img src="<%= menu[i].itemImage %>" alt="" height="50" width="50">
+          <span class="lead mb-3 menu-items"> <%= menu[i].itemName %> - </span>
+          <span class="lead mb-3 menu-items">₹ <%= menu[i].itemPrice %></span> 
+          <button class="delItem btn btn-danger" value=<%= i %>>X</button> <br>
+          <span class="lead mb-6"> <%= menu[i].itemDescription %></span>
+          </div>
+        <% } %>
       <% } %>
 
+      <h4> Main Course </h4>
+       <% for (let i=0; i<menu.length; i++){ %>
+        <% if (menu[i].itemType == "maincourse"){ %>
+          <div class="formgroup">
+          <img src="<%= menu[i].itemImage %>" alt="" height="50" width="50">
+          <span class="lead mb-3 menu-items"> <%= menu[i].itemName %> - </span>
+          <span class="lead mb-3 menu-items">₹ <%= menu[i].itemPrice %></span>
+          <button class="delItem btn btn-danger" value=<%= i %>>X</button> <br>
+          <span class="lead mb-6"> <%= menu[i].itemDescription %></span>
+          </div>
+        <% } %>
+      <% } %>
+      
+      <h4> Desserts </h4>
+      <% for (let i=0; i<menu.length; i++){ %>
+       <% if (menu[i].itemType == "dessert"){ %>
+         <div class="formgroup">
+         <img src="<%= menu[i].itemImage %>" alt="" height="50" width="50">
+         <span class="lead mb-3 menu-items"> <%= menu[i].itemName %> - </span>
+         <span class="lead mb-3 menu-items">₹ <%= menu[i].itemPrice %></span>
+         <button class="delItem btn btn-danger" value=<%= i %>>X</button> <br>
+         <span class="lead mb-6"> <%= menu[i].itemDescription %></span>
+         </div>
+       <% } %>
+     <% } %>
+
+     <h4> Drinks </h4>
+     <% for (let i=0; i<menu.length; i++){ %>
+      <% if (menu[i].itemType == "drink"){ %>
+        <div class="formgroup">
+        <img src="<%= menu[i].itemImage %>" alt="" height="50" width="50">
+        <span class="lead mb-3 menu-items"> <%= menu[i].itemName %> - </span>
+        <span class="lead mb-3 menu-items">₹ <%= menu[i].itemPrice %></span>
+        <button class="delItem btn btn-danger" value=<%= i %>>X</button> <br>
+        <span class="lead mb-6"> <%= menu[i].itemDescription %></span>
+        </div>
+      <% } %>
+    <% } %>
       <script>
         // prevent form resubmission
         if ( window.history.replaceState ) {
@@ -53,8 +95,18 @@
         <h1 class="text-center mb-3"><i class="fas fa-sign-in-alt"></i>  Menu</h1>
         <%- include("./partials/messages.ejs"); -%>
         <form action="/users/menu" method="POST" enctype="multipart/form-data">
+          <p class="lead"> *All fields are required</p>
           <div class="form-group">
-            <label for="email">Item Name :</label>
+            <div class="form-group">
+              <label for="itemType">Item Type :</label>
+              <select name="itemType" id="itemType">
+                <option value="starter">Starters</option>
+                <option value="maincourse">Main Course</option>
+                <option value="dessert">Desserts</option>
+                <option value="drink">Drinks</option>
+              </select>
+            </div>
+            <label for="itemName">Item Name :</label>
             <input
               type="text"
               id="itemName"
@@ -64,7 +116,7 @@
             />
           </div>
           <div class="form-group">
-            <label for="password">Item Price :</label>
+            <label for="itemPrice">Item Price :</label>
             <input
               type="number"
               id="itemPrice"
@@ -80,6 +132,16 @@
               id="itemImage"
               name="itemImage"
               class="form-control"
+            />
+          </div> 
+          <div class="form-group">
+            <label for="description">Description</label>
+            <input
+              type="text"
+              id="itemDescription"
+              name="itemDescription"
+              class="form-control"
+              placeholder="Enter description here"
             />
           </div>
           <button type="submit" class="btn btn-primary btn-block">Add Item</button>
