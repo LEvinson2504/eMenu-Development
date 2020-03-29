@@ -4,7 +4,7 @@ const { ensureAuthenticated } = require("../config/auth");
 const User = require('../models/User');
 
 //make styles public
-router.use( express.static( "public" ) )
+router.use( express.static( "public/" ) )
 //body parser
 router.use(express.json());
 //welcome page
@@ -31,10 +31,11 @@ router.post('/dashboard', ensureAuthenticated, (req, res) => {
 })
 
 router.get('/menu/:id/:table?', (req, res) => {
+
     //shorthand for let id = req.params.id
     const {id, table} = req.params;
     // res.json(menuId);
-    console.log(req.params);
+    // console.log(req.params);
     User.findOne({_id: id}, function(err, user){
         if(err) {
             res.status(500).send();

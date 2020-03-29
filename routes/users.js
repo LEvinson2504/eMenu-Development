@@ -8,7 +8,7 @@ const multer = require('multer')
 var upload = multer({ dest: 'uploads/' })
 
 //make styles public
-router.use( express.static( "public" ) )
+router.use( express.static( "public/" ) )
 //Login page
 router.get('/login', (req, res) => res.render('login'));
 

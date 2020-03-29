@@ -1,4 +1,4 @@
-@font-face {
+/* @font-face {
     font-family: 'black_jackregular';
     src: url('blackjack-webfont.woff');
     src: url('blackjack-webfont.eot?#iefix') format('embedded-opentype'),
@@ -9,11 +9,8 @@
     font-weight: normal;
     font-style: normal;
 
-}
-body {
-    /* background-color: #b8e1ff; */
-    /* background-image: url("eat-printed-paper-709840.jpg"); */
-}
+} */
+
 .background-img {
     height: 100%;
     width: 100%;

@@ -1,4 +1,4 @@
-<div class="container row d-inline justify-content-center">
+<div class="card row d-inline justify-content-center">
 <h1 class="lead md-2">Your table is : <%= table %></h1>
 <ul class="card list-group">
     <!-- <div class="col-md-6 m-auto"> -->
@@ -14,7 +14,7 @@
 </ul>
 
 <!-- cart -->
-<section class="card row d-flex pt-5">
+<section class="card pt-5">
             <h1 class="section-header d-block mx-auto">CART</h1>
             <!-- <div class="cart-row d-block mx-auto">
                 <span class="cart-item cart-header cart-column">ITEM</span>
@@ -31,12 +31,12 @@
             <button class="btn btn-primary btn-purchase" type="button">PURCHASE</button>
         </section>
 
-
-<img alt="Menu barcode"
-     src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=<%= barcode %>"
-     class="rounded mx-auto d-block pt-5 pb-2" >
-     <p class="text-muted text-center">scan to open the menu on your phone!</p>
-</div>
+        
+        <img alt="Menu barcode"
+        src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=<%= barcode %>"
+        class="rounded mx-auto d-block pt-5 pb-2" >
+        <p class="text-muted text-center">scan to open the menu on your phone!</p>
+    </div>
 <script>
   let table = <%= table %>;
   // prevent form resubmission
@@ -49,6 +49,7 @@
   for(let i = 0; i < buttons.length; i++) {
     buttons[i].addEventListener("click", addToCartClicked);
   }
+
 //   for(let i=0; i<buttons.length; i++){
 //     buttons[i].addEventListener("click", function() {
 //       // console.log(buttons[i].value)     
@@ -101,9 +102,22 @@ function ready() {
 function purchaseClicked() {
     alert('Thank you for your purchase')
     var cartItems = document.getElementsByClassName('cart-items')[0]
+    console.log(cartItems);
     while (cartItems.hasChildNodes()) {
-        cartItems.removeChild(cartItems.firstChild)
+        console.log(cartItems.firstChild);
+        cartItems.removeChild(cartItems.firstChild);
     }
+    const response = fetch('/menu/order', {
+            method: 'post',
+            body: JSON.stringify({
+                value: cartItems.firstChild,
+                table: table,
+            }),
+            headers: { 'Content-Type': 'application/json' },
+        });
+        console.log('Completed!', response);
+        // window.reload();
+        // location.reload();
     updateCartTotal()
 }
 
@@ -182,10 +196,6 @@ function updateCartTotal() {
 <a href="/users/logout" class="btn btn-secondary">Logout</a>
 <a href="/users/menu" class="btn btn-primary">Add Menu</a>
 </div> -->
-
-
-<script>
-</script>
 
     
 
