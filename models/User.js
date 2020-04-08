@@ -4,6 +4,17 @@ const mongoose = require("mongoose");
 
 // });
 
+const OrderSchema = new mongoose.Schema({ 
+    table: {
+        type: String,
+        // required: true
+    },
+    date: {
+        type: Date,
+        default: Date.now
+    }
+});
+
 const MenuSchema = new mongoose.Schema({
     itemName: {
         type: String,
@@ -26,8 +37,12 @@ const MenuSchema = new mongoose.Schema({
     itemType: {
         type: String,
         // required: true,
-    }
+    },
+    orders: [OrderSchema]
 });
+
+
+
 const UserSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -56,4 +71,7 @@ const UserSchema = new mongoose.Schema({
 });
 
 const User = mongoose.model("User", UserSchema);
-module.exports = User;
+module.exports = User; //alternate method
+
+const Menu = mongoose.model("Menu", MenuSchema);
+module.exports.Menu = Menu;

@@ -102,20 +102,27 @@ function ready() {
 function purchaseClicked() {
     alert('Thank you for your purchase')
     var cartItems = document.getElementsByClassName('cart-items')[0]
-    console.log(cartItems);
+    // console.log(cartItems);
+    // var cartItemTitles = document.getElementsByClassName('cart-item-title')[0];
+    // console.log("titles - ", cartItemTitles);
+    
+    let totalCartItemTitles = [];
     while (cartItems.hasChildNodes()) {
-        console.log(cartItems.firstChild);
+        totalCartItemTitles.push(document.getElementsByClassName('cart-item-title')[0].innerText.replace(/^[-\s]+|[-\s]+$/g, ""));
+        // console.log(document.getElementsByClassName('cart-item-title')[0].innerText);
         cartItems.removeChild(cartItems.firstChild);
     }
+    console.log(totalCartItemTitles);
     const response = fetch('/menu/order', {
             method: 'post',
             body: JSON.stringify({
-                value: cartItems.firstChild,
+                value: totalCartItemTitles,
                 table: table,
             }),
             headers: { 'Content-Type': 'application/json' },
-        });
-        console.log('Completed!', response);
+        })
+        .then(console.log('Completed!'))
+        // console.log(response);
         // window.reload();
         // location.reload();
     updateCartTotal()
@@ -137,7 +144,7 @@ function quantityChanged(event) {
 
 function addToCartClicked(event) {
   // console.log("click res");
-  // event.preventDefault();
+//   event.preventDefault();
     var button = event.target 
     var shopItem = button.parentElement;
     var title = shopItem.getElementsByClassName('item-name')[0].innerText
@@ -159,6 +166,7 @@ function addItemToCart(title, price, imageSrc) {
             return
         }
     }
+    
     var cartRowContents = `
         <div class="cart-item cart-column">
             <img class="cart-item-image" src="${imageSrc}" width="50" height="50">
@@ -171,6 +179,7 @@ function addItemToCart(title, price, imageSrc) {
         </div>`
     cartRow.innerHTML = cartRowContents
     cartItems.append(cartRow)
+
     cartRow.getElementsByClassName('btn-danger')[0].addEventListener('click', removeCartItem)
     cartRow.getElementsByClassName('cart-quantity-input')[0].addEventListener('change', quantityChanged)
 }

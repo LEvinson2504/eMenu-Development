@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { ensureAuthenticated } = require("../config/auth");
 const User = require('../models/User');
+const {Menu} = require('../models/User')
 
 //make styles public
 router.use( express.static( "public/" ) )
@@ -55,8 +56,12 @@ router.get('/menu/:id/:table?', (req, res) => {
 
 //Place order 
 router.post("/menu/order", express.json(), (req, res) => {
+    // console.log(req.body);
     const {value, table} = req.body;
     console.log( value + " was ordered on table " + table);
+    // User.findOne({name: "test"}, function(err, item){
+    //     console.log(item.menu);
+    // });
 });
 
 module.exports = router;
