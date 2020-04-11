@@ -9,6 +9,16 @@ const OrderSchema = new mongoose.Schema({
         type: String,
         // required: true
     },
+    items: {
+        type: [String],
+    },
+    totalPrice: {
+        type: Number,
+    },
+    payment: {
+        type: Boolean,
+        default: false,
+    },
     date: {
         type: Date,
         default: Date.now
@@ -38,7 +48,7 @@ const MenuSchema = new mongoose.Schema({
         type: String,
         // required: true,
     },
-    orders: [OrderSchema]
+    
 });
 
 
@@ -68,6 +78,7 @@ const UserSchema = new mongoose.Schema({
                     , itemType: "not selected" 
                 }]
     },
+    orders: [OrderSchema]
 });
 
 const User = mongoose.model("User", UserSchema);

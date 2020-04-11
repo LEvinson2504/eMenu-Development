@@ -41,7 +41,7 @@ router.get('/menu/:id/:table?', (req, res) => {
         if(err) {
             res.status(500).send();
         } else {
-            console.log(user);
+            // console.log(user);
             res.render('publicMenu', {
                 name: user.name,
                 menu: user.menu,
@@ -56,12 +56,32 @@ router.get('/menu/:id/:table?', (req, res) => {
 
 //Place order 
 router.post("/menu/order", express.json(), (req, res) => {
-    // console.log(req.body);
-    const {value, table} = req.body;
-    console.log( value + " was ordered on table " + table);
-    // User.findOne({name: "test"}, function(err, item){
-    //     console.log(item.menu);
-    // });
+    console.log(req.body);
+    const {items, table, totalPrice} = req.body;
+    console.log( items + " was ordered on table " + table);
+    User.findOne({name: "test"}, function(err, user){
+        // console.log(user.orders);
+        if (err) {
+            res.status(500).send();
+        } else {
+            user.orders.push({
+                table: table,
+                items: items,
+                totalPrice: totalPrice
+            })
+        }
+        user.save(function(err, savedUser){
+            if(err){
+                res.status(500).send();
+            } else {
+                res.render('pendingOrders', {
+                    name: savedUser.name,
+                    menu: savedUser.orders
+                })
+            }
+        })
+    });
+    
 });
 
 module.exports = router;

@@ -112,11 +112,13 @@ function purchaseClicked() {
         // console.log(document.getElementsByClassName('cart-item-title')[0].innerText);
         cartItems.removeChild(cartItems.firstChild);
     }
+    let totalPrice = parseInt(document.getElementsByClassName('cart-total-price')[0].innerText.replace("₹", ""));
     console.log(totalCartItemTitles);
     const response = fetch('/menu/order', {
             method: 'post',
             body: JSON.stringify({
-                value: totalCartItemTitles,
+                items: totalCartItemTitles,
+                totalPrice: totalPrice, 
                 table: table,
             }),
             headers: { 'Content-Type': 'application/json' },
