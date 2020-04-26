@@ -1,7 +1,8 @@
-<h1 class="mt-4">Dashboard</h1>
-<p class="lead mb-3">Welcome <%= name %> </p>
+
 <div class="container-fluid row justify-content-center">
   <ul class="card list-group col-sm-8 p-4">
+    <h1 class="display lg-2">Dashboard</h1>
+  <p class="lead mb-3">Welcome <%= name %> </p>
           <h1 class="display lg-6 text-center">Menu</h1>
           <% for (let i=0; i<menu.length; i++){ %>
             <li class="list-group-item">
@@ -33,3 +34,18 @@
     <p class="text-muted text-center">Save/Print this image for <br>customer's to open your menu!</p>
 </div>
 </div>
+<h1 class="display lg-6 text-center">Pending orders :</h1>
+<% for (let i=0; i<orders.length; i++){ %>
+  <% if (!orders[i].payment) { %>
+  <li class="list-group-item">
+    <% for (let j=0; j<orders[i].items.length; j++){ %>
+      <ol class="lead"> 
+        <li> <%= orders[i].items[j] %> </li>
+      </ol>
+    <% } %>
+    <span class="lead mb-3 menu-items"> Table No. <%= orders[i].table %> - </span>
+    <span class="lead mb-3 menu-items">₹ <%= orders[i].totalPrice %> </span>
+  </li>
+<% } %>
+<% } %>
+

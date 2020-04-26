@@ -17,19 +17,28 @@
     min-width: 1280px;
     position: absolute;
     overflow: hidden;
-    
+    z-index: -100;
 }
 .card {
     background-color: #e6ebe0;
 }
 
+.payment-card {
+    background-color: white;
+    padding: 5px;
+    width: 500px;
+    justify-content: center;
+}
 p, h1, h3{
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    padding: 3px;
+    padding: 2px;
 }
 
 .menu-items {
     font-family: black_jackregular;
     font-size: 30px;
     color: #435058;
+}
+button {
+    margin: 5px 5px;
 }
