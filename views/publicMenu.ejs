@@ -107,13 +107,14 @@ function purchaseClicked() {
     // console.log("titles - ", cartItemTitles);
     
     let totalCartItemTitles = [];
+    console.log(document.getElementsByClassName('cart-item-title')[0].innerText);
     while (cartItems.hasChildNodes()) {
         totalCartItemTitles.push(document.getElementsByClassName('cart-item-title')[0].innerText.replace(/^[-\s]+|[-\s]+$/g, ""));
         // console.log(document.getElementsByClassName('cart-item-title')[0].innerText);
         cartItems.removeChild(cartItems.firstChild);
     }
     let totalPrice = parseInt(document.getElementsByClassName('cart-total-price')[0].innerText.replace("₹", ""));
-    console.log(totalCartItemTitles);
+    console.log(totalCartItemTitles.splice(0, 1));
     const response = fetch('/menu/order', {
             method: 'post',
             body: JSON.stringify({

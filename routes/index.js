@@ -62,7 +62,7 @@ router.get('/menu/:id/:table?', (req, res) => {
 
 //Place order 
 router.post("/menu/order", express.json(), (req, res) => {
-    console.log(req.body);
+    console.log(req.body.items);
     const { items, table, totalPrice } = req.body;
     console.log(items + " was ordered on table " + table);
     User.findOne({ name: "test" }, function (err, user) {
@@ -80,10 +80,10 @@ router.post("/menu/order", express.json(), (req, res) => {
             if (err) {
                 res.status(500).send();
             } else {
-                res.render('pendingOrders', {
-                    name: savedUser.name,
-                    menu: savedUser.orders
-                })
+                // res.render('pendingOrders', {
+                //     name: savedUser.name,
+                //     menu: savedUser.orders
+                // })   
             }
         })
     });
