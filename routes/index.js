@@ -17,7 +17,7 @@ router.get('/', (req, res) => res.render('welcome'));
 
 //dashboard
 router.get('/dashboard', ensureAuthenticated, (req, res) => {
-    console.log(req.user);
+    // console.log(req.user);
     res.render('dashboard', {
         name: req.user.name,
         menu: req.user.menu,
@@ -28,10 +28,11 @@ router.get('/dashboard', ensureAuthenticated, (req, res) => {
 })
 
 router.post('/dashboard', ensureAuthenticated, (req, res) => {
-    console.log(req.body.tablenumber);
+    // console.log(req.body.tablenumber);
     res.render('dashboard', {
         name: req.user.name,
         menu: req.user.menu,
+        orders: req.user.orders,
         barcode: "https://pacific-savannah-86216.herokuapp.com/menu/" + req.user._id + "/" + req.body.tablenumber,
     });
 

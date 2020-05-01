@@ -34,6 +34,8 @@
     <p class="text-muted text-center">Save/Print this image for <br>customer's to open your menu!</p>
 </div>
 </div>
+
+<div class="container-fluid card justify-content-center">
 <h1 class="display lg-6 text-center">Pending orders :</h1>
 <% for (let i=0; i<orders.length; i++){ %>
   <% if (!orders[i].payment) { %>
@@ -48,4 +50,5 @@
   </li>
 <% } %>
 <% } %>
+</div>
 
