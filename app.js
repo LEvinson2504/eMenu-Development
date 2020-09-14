@@ -9,10 +9,10 @@ const passport = require("passport");
 const app = express();
 
 //make uploads public
-app.use( express.static( "uploads" ) );
+app.use(express.static("uploads"));
 
 //make styles public
-app.use( express.static( "public" ) );
+app.use(express.static("public"));
 //passport config 
 require("./config/passport")(passport);
 
@@ -21,22 +21,22 @@ const db = require("./config/keys").MongoURI;
 
 //connect to mongo
 mongoose.connect(db, { useNewUrlParser: true })
-.then(console.log("mongodb connected"))
-.catch(err => console.log(err));
+  .then(console.log("mongodb connected"))
+  .catch(err => console.log(err));
 
-//EJS
+//use EJS client side
 app.use(expressLayouts);
 app.set("view engine", "ejs");
 
 //Body parser
-app.use(express.urlencoded({extended: false}));
+app.use(express.urlencoded({ extended: false }));
 
 //express sessiion middleware
 app.use(session({
-    secret: 'secret',
-    resave: true,
-    saveUninitialized: true,
-  }))
+  secret: 'secret',
+  resave: true,
+  saveUninitialized: true,
+}))
 
 //passport middleware
 app.use(passport.initialize());
@@ -47,10 +47,10 @@ app.use(flash());
 
 //global vars
 app.use((req, res, next) => {
-    res.locals.success_msg = req.flash("success_msg");
-    res.locals.error_msg = req.flash("error_msg");
-    res.locals.error = req.flash("error");
-    next();
+  res.locals.success_msg = req.flash("success_msg");
+  res.locals.error_msg = req.flash("error_msg");
+  res.locals.error = req.flash("error");
+  next();
 })
 
 //Routes

@@ -53,7 +53,7 @@ router.get('/menu/:id/:table?', (req, res) => {
                 name: user.name,
                 menu: user.menu,
                 barcode: "https://pacific-savannah-86216.herokuapp.com/menu/" + id,
-                table: table || 0,
+                table: table || "0",
                 // itemName: req.user.menu,
                 // itemPrice: req.user.menu,
             });
@@ -94,16 +94,16 @@ router.post("/menu/order", express.json(), (req, res) => {
 
 router.get('/checkout', async (req, res) => {
     try {
-    const paymentIntent = await stripe.paymentIntents.create({
-      amount: 2000,
-      currency: 'inr',
-      // Verify your integration in this guide by including this parameter
-      metadata: {integration_check: 'accept_a_payment'},
-    });
+        const paymentIntent = await stripe.paymentIntents.create({
+            amount: 2000,
+            currency: 'inr',
+            // Verify your integration in this guide by including this parameter
+            metadata: { integration_check: 'accept_a_payment' },
+        });
 
-    const {client_secret} = paymentIntent;
-    res.render('checkout', { client_secret});
-    } catch(err) {
+        const { client_secret } = paymentIntent;
+        res.render('checkout', { client_secret });
+    } catch (err) {
         // alert("Payment failed");
     }
 });
