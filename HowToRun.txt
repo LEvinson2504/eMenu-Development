@@ -1,0 +1,7 @@
+# node and npm is required to run the project. run node -v to check
+
+# Install dependencies by running in the root folder
+npm install
+
+# run the project on node using
+node app.js
